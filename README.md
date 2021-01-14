@@ -6,5 +6,5 @@
 ### Configuração do Ambiente: 
 (configs)
 
-### Video: 
+### Vídeo: 
 (url do video)
