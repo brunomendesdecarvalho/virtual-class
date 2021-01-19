@@ -15,8 +15,8 @@ class AlunoSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class SalaSerializer(serializers.HyperlinkedModelSerializer):
-    professor = serializers.SlugRelatedField(queryset=Professor.objects.all(), slug_field='professor')
-    alunos = serializers.SlugRelatedField(queryset=Aluno.objects.all(), slug_field='alunos')
+    professor = serializers.SlugRelatedField(queryset=Professor.objects.all(), slug_field='nome')
+    alunos = serializers.SlugRelatedField(many = True, queryset=Aluno.objects.all(), slug_field='nome')
 
     class Meta:
         model = Sala
@@ -24,7 +24,7 @@ class SalaSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class AtividadeSerializer(serializers.HyperlinkedModelSerializer):
-    sala = serializers.SlugRelatedField(queryset=Sala.objects.all(), slug_field='sala')
+    sala = serializers.SlugRelatedField(queryset=Sala.objects.all(), slug_field='disciplina')
 
     class Meta:
         model = Atividade
