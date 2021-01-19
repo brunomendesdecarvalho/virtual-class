@@ -27,6 +27,7 @@ class Aluno(models.Model):
 
 
 class Sala(models.Model):
+    owner = models.ForeignKey('auth.User', related_name='sala', on_delete=models.CASCADE)
     disciplina = models.CharField(max_length=50)
     professor = models.ForeignKey(Professor, related_name='professor', on_delete=models.CASCADE)
     alunos = models.ManyToManyField(Aluno, related_name='alunos')

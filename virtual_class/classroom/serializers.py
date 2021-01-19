@@ -15,12 +15,13 @@ class AlunoSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class SalaSerializer(serializers.HyperlinkedModelSerializer):
+    criador = serializers.ReadOnlyField(source = 'owner.username')
     professor = serializers.SlugRelatedField(queryset=Professor.objects.all(), slug_field='nome')
     alunos = serializers.SlugRelatedField(many = True, queryset=Aluno.objects.all(), slug_field='nome')
 
     class Meta:
         model = Sala
-        fields = ('url', 'disciplina', 'professor', 'alunos')
+        fields = ('url', 'criador', 'disciplina', 'professor', 'alunos')
 
 
 class AtividadeSerializer(serializers.HyperlinkedModelSerializer):
@@ -29,3 +30,20 @@ class AtividadeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Atividade
         fields = ('url', 'sala', 'titulo', 'descricao', 'data_criado', 'data_entrega')
+
+
+class UserSalaSerializer(serializers.HyperlinkedModelSerializer):
+
+
+    class Meta:
+        model = Sala
+        fields = ('url', 'disciplina')
+
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    salas = UserSalaSerializer(many = True, read_only = True)
+
+
+    class Meta:
+        model = User
+        fields = ('url', 'pk', 'username', 'salas')
