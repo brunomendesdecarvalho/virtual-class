@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from classroom import views
+from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
     path('professores/', views.ProfessorList.as_view(), name=views.ProfessorList.name),
@@ -28,4 +29,6 @@ urlpatterns = [
     path('atividades/<int:pk>/', views.AtividadeDetail.as_view(), name=views.AtividadeDetail.name),
     path('', views.ApiRoot.as_view(), name=views.ApiRoot.name),
     path('admin/', admin.site.urls),
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 ]
