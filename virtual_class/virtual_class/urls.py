@@ -14,9 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include, re_path
 from classroom import views
-from rest_framework_simplejwt import views as jwt_views
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
+
 
 urlpatterns = [
     path('professores/', views.ProfessorList.as_view(), name=views.ProfessorList.name),
@@ -28,7 +29,10 @@ urlpatterns = [
     path('atividades/', views.AtividadeList.as_view(), name=views.AtividadeList.name),
     path('atividades/<int:pk>/', views.AtividadeDetail.as_view(), name=views.AtividadeDetail.name),
     path('', views.ApiRoot.as_view(), name=views.ApiRoot.name),
+    path('users/', views.UserList.as_view(), name=views.UserList.name),
+    path('users/<int:pk>/', views.UserDetail.as_view(), name = views.UserDetail.name),
     path('admin/', admin.site.urls),
-    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+    path('api-auth/', include('rest_framework.urls')),
+    re_path(r'^login/', obtain_jwt_token),
+    re_path(r'^refresh-token/', refresh_jwt_token),
 ]

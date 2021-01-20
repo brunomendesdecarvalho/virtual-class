@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+from django.contrib.auth.models import User
 
 
 class ProfessorSerializer(serializers.HyperlinkedModelSerializer):
@@ -15,13 +16,13 @@ class AlunoSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class SalaSerializer(serializers.HyperlinkedModelSerializer):
-    criador = serializers.ReadOnlyField(source = 'owner.username')
+    owner = serializers.ReadOnlyField(source = 'owner.username')
     professor = serializers.SlugRelatedField(queryset=Professor.objects.all(), slug_field='nome')
     alunos = serializers.SlugRelatedField(many = True, queryset=Aluno.objects.all(), slug_field='nome')
 
     class Meta:
         model = Sala
-        fields = ('url', 'criador', 'disciplina', 'professor', 'alunos')
+        fields = ('url', 'owner', 'disciplina', 'professor', 'alunos')
 
 
 class AtividadeSerializer(serializers.HyperlinkedModelSerializer):
