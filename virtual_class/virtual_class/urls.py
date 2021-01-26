@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from classroom import views
-from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
 urlpatterns = [
@@ -32,7 +32,6 @@ urlpatterns = [
     path('users/', views.UserList.as_view(), name=views.UserList.name),
     path('users/<int:pk>/', views.UserDetail.as_view(), name = views.UserDetail.name),
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
-    re_path(r'^login/', obtain_jwt_token),
-    re_path(r'^refresh-token/', refresh_jwt_token),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
