@@ -9,7 +9,10 @@ from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from .models import *
 from .serializers import *
 from .permissions import *
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
 
 
 class ProfessorList(generics.ListCreateAPIView):
@@ -17,9 +20,7 @@ class ProfessorList(generics.ListCreateAPIView):
     serializer_class = ProfessorSerializer
     name = 'professor-list'
     throttle_classes = (AnonRateThrottle, UserRateThrottle)
-    permissions_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-    ]
+    permission_classes = (permissions.IsAdminUser,)
     
 
 class ProfessorDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -27,9 +28,8 @@ class ProfessorDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProfessorSerializer
     name = 'professor-detail'
     throttle_scope = 'user'
-    permissions_classes = [
-        permissions.IsAdminUser
-    ]
+    permission_classes = (permissions.IsAdminUser,)
+    
 
 
 class AlunoList(generics.ListCreateAPIView):
@@ -37,9 +37,8 @@ class AlunoList(generics.ListCreateAPIView):
     serializer_class = AlunoSerializer
     name = 'alunos-list'
     throttle_classes = (AnonRateThrottle, UserRateThrottle)
-    permissions_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-    ]
+    permission_classes = (permissions.IsAdminUser,)
+    
     
 
 class AlunoDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -47,9 +46,8 @@ class AlunoDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AlunoSerializer
     name = 'aluno-detail'
     throttle_classes = (AnonRateThrottle, UserRateThrottle)
-    permissions_classes = [
-        permissions.IsAdminUser
-    ]
+    permission_classes = (permissions.IsAdminUser,)
+    
 
 
 class SalaList(generics.ListCreateAPIView):
@@ -57,24 +55,16 @@ class SalaList(generics.ListCreateAPIView):
     serializer_class = SalaSerializer
     name = 'salas-list'
     throttle_classes = (AnonRateThrottle, UserRateThrottle)
-    permissions_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-    ]
-
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+    permission_classes = (IsProfessorOrReadOnly, )
     
 
 class SalaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Sala.objects.all()
     serializer_class = SalaSerializer
     name = 'sala-detail'
+    permission_classes = (IsProfessorOrReadOnly,)
     throttle_classes = (AnonRateThrottle, UserRateThrottle)
-    permissions_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-        PermissaoAcesso
-    ]
+    
 
 
 class AtividadeList(generics.ListCreateAPIView):
@@ -82,9 +72,8 @@ class AtividadeList(generics.ListCreateAPIView):
     serializer_class = AtividadeSerializer
     name = 'atividades-list'
     throttle_classes = (AnonRateThrottle, UserRateThrottle)
-    permissions_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-    ]
+    permission_classes = (IsProfessorOrReadOnly, )
+    
     
 
 class AtividadeDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -92,28 +81,24 @@ class AtividadeDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AtividadeSerializer
     name = 'atividade-detail'
     throttle_classes = (AnonRateThrottle, UserRateThrottle)
-    permissions_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-        PermissaoAcesso
-    ]
+    permission_classes = (IsProfessorOrReadOnly,)
+    
 
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     name = 'user-list'
-    permissions_classes = [
-        permissions.IsAdminUser
-    ]
+    permission_classes = (permissions.IsAdminUser,)
+    
 
 
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     name = 'user-detail'
-    permissions_classes = (
-        permissions.IsAdminUser
-    )
+    permission_classes = (permissions.IsAdminUser,)
+    
 
 
 class ApiRoot(generics.GenericAPIView):

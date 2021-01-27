@@ -1,7 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
+
 class Professor(models.Model):
     nome = models.CharField(max_length=200)
     idade = models.IntegerField()
@@ -28,7 +28,6 @@ class Aluno(models.Model):
 
 
 class Sala(models.Model):
-    owner = models.ForeignKey('auth.User', related_name='sala', on_delete=models.CASCADE)
     disciplina = models.CharField(max_length=50)
     professor = models.ForeignKey(Professor, related_name='professor', on_delete=models.CASCADE)
     alunos = models.ManyToManyField(Aluno, related_name='alunos')
@@ -54,3 +53,12 @@ class Atividade(models.Model):
 
     def __str__(self):
         return self.titulo
+
+
+class User(AbstractUser):
+    usu_eh_aluno = models.BooleanField(default = False, verbose_name = "Aluno", help_text = "Caso o usuário seja um aluno, ele terá acesso apenas para leitura.")
+    usu_eh_professor = models.BooleanField(default = False, verbose_name = "Professor", help_text = "Caso o usuário seja um professor, ele poderá criar e apagar salas e atividades.")
+
+
+    class Meta:
+        ordering = ('usu_eh_professor', )
