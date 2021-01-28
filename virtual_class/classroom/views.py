@@ -1,8 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import status
-from rest_framework import generics
+from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
@@ -19,15 +18,15 @@ class ProfessorList(generics.ListCreateAPIView):
     queryset = Professor.objects.all()
     serializer_class = ProfessorSerializer
     name = 'professor-list'
-    throttle_classes = (AnonRateThrottle, UserRateThrottle)
-    permission_classes = (permissions.IsAdminUser,)
-    
+    permission_classes = (permissions.IsAdminUser | IsProfessorOrReadOnly,)
+
+
 
 class ProfessorDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Professor.objects.all()
     serializer_class = ProfessorSerializer
     name = 'professor-detail'
-    throttle_scope = 'user'
+    throttle_scope = 'professor'
     permission_classes = (permissions.IsAdminUser,)
     
 
@@ -36,8 +35,7 @@ class AlunoList(generics.ListCreateAPIView):
     queryset = Aluno.objects.all()
     serializer_class = AlunoSerializer
     name = 'alunos-list'
-    throttle_classes = (AnonRateThrottle, UserRateThrottle)
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.IsAdminUser | IsProfessorOrReadOnly,)
     
     
 
@@ -45,7 +43,7 @@ class AlunoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Aluno.objects.all()
     serializer_class = AlunoSerializer
     name = 'aluno-detail'
-    throttle_classes = (AnonRateThrottle, UserRateThrottle)
+    throttle_scope = 'aluno'
     permission_classes = (permissions.IsAdminUser,)
     
 
@@ -54,7 +52,6 @@ class SalaList(generics.ListCreateAPIView):
     queryset = Sala.objects.all()
     serializer_class = SalaSerializer
     name = 'salas-list'
-    throttle_classes = (AnonRateThrottle, UserRateThrottle)
     permission_classes = (IsProfessorOrReadOnly, )
     
 
@@ -62,16 +59,14 @@ class SalaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Sala.objects.all()
     serializer_class = SalaSerializer
     name = 'sala-detail'
-    permission_classes = (IsProfessorOrReadOnly,)
-    throttle_classes = (AnonRateThrottle, UserRateThrottle)
-    
+    throttle_scope = 'sala'
+    permission_classes = (IsProfessorOrReadOnly | permissions.IsAdminUser,)
 
 
 class AtividadeList(generics.ListCreateAPIView):
     queryset = Atividade.objects.all()
     serializer_class = AtividadeSerializer
     name = 'atividades-list'
-    throttle_classes = (AnonRateThrottle, UserRateThrottle)
     permission_classes = (IsProfessorOrReadOnly, )
     
     
@@ -80,8 +75,8 @@ class AtividadeDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Atividade.objects.all()
     serializer_class = AtividadeSerializer
     name = 'atividade-detail'
-    throttle_classes = (AnonRateThrottle, UserRateThrottle)
-    permission_classes = (IsProfessorOrReadOnly,)
+    throttle_scope = 'atividade'
+    permission_classes = (IsProfessorOrReadOnly | permissions.IsAdminUser,)
     
 
 
@@ -102,6 +97,7 @@ class UserDetail(generics.RetrieveAPIView):
 
 
 class ApiRoot(generics.GenericAPIView):
+    permissions_classes = (permissions.IsAuthenticatedOrReadOnly,)
     name='classroom'
     def get(self, request, *args, **kwargs):
         return Response({
