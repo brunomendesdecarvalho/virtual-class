@@ -1,0 +1,919 @@
+openapi: 3.0.3
+info:
+  title: ''
+  version: 0.0.0
+paths:
+  /:
+    get:
+      operationId: root_retrieve
+      description: ''
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /alunos/:
+    get:
+      operationId: alunos_list
+      description: ''
+      tags:
+      - alunos
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Aluno'
+          description: ''
+    post:
+      operationId: alunos_create
+      description: ''
+      tags:
+      - alunos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Aluno'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Aluno'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Aluno'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Aluno'
+          description: ''
+  /alunos/{id}/:
+    get:
+      operationId: alunos_retrieve
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - alunos
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Aluno'
+          description: ''
+    put:
+      operationId: alunos_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - alunos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Aluno'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Aluno'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Aluno'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Aluno'
+          description: ''
+    patch:
+      operationId: alunos_partial_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - alunos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAluno'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAluno'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAluno'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Aluno'
+          description: ''
+    delete:
+      operationId: alunos_destroy
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - alunos
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/token/:
+    post:
+      operationId: api_token_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /api/token/refresh/:
+    post:
+      operationId: api_token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /atividades/:
+    get:
+      operationId: atividades_list
+      description: ''
+      tags:
+      - atividades
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Atividade'
+          description: ''
+    post:
+      operationId: atividades_create
+      description: ''
+      tags:
+      - atividades
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Atividade'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Atividade'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Atividade'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Atividade'
+          description: ''
+  /atividades/{id}/:
+    get:
+      operationId: atividades_retrieve
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - atividades
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Atividade'
+          description: ''
+    put:
+      operationId: atividades_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - atividades
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Atividade'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Atividade'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Atividade'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Atividade'
+          description: ''
+    patch:
+      operationId: atividades_partial_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - atividades
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAtividade'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAtividade'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAtividade'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Atividade'
+          description: ''
+    delete:
+      operationId: atividades_destroy
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - atividades
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /professores/:
+    get:
+      operationId: professores_list
+      description: ''
+      tags:
+      - professores
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Professor'
+          description: ''
+    post:
+      operationId: professores_create
+      description: ''
+      tags:
+      - professores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Professor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Professor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Professor'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Professor'
+          description: ''
+  /professores/{id}/:
+    get:
+      operationId: professores_retrieve
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - professores
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Professor'
+          description: ''
+    put:
+      operationId: professores_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - professores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Professor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Professor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Professor'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Professor'
+          description: ''
+    patch:
+      operationId: professores_partial_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - professores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProfessor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProfessor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProfessor'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Professor'
+          description: ''
+    delete:
+      operationId: professores_destroy
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - professores
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /salas/:
+    get:
+      operationId: salas_list
+      description: ''
+      tags:
+      - salas
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sala'
+          description: ''
+    post:
+      operationId: salas_create
+      description: ''
+      tags:
+      - salas
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sala'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Sala'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Sala'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sala'
+          description: ''
+  /salas/{id}/:
+    get:
+      operationId: salas_retrieve
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - salas
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sala'
+          description: ''
+    put:
+      operationId: salas_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - salas
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sala'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Sala'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Sala'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sala'
+          description: ''
+    patch:
+      operationId: salas_partial_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - salas
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSala'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedSala'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedSala'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sala'
+          description: ''
+    delete:
+      operationId: salas_destroy
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - salas
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /users/:
+    get:
+      operationId: users_list
+      description: ''
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+          description: ''
+  /users/{id}/:
+    get:
+      operationId: users_retrieve
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+components:
+  schemas:
+    Aluno:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 200
+        idade:
+          type: integer
+        semestre:
+          type: integer
+        curso:
+          type: string
+          maxLength: 50
+      required:
+      - curso
+      - idade
+      - nome
+      - semestre
+      - url
+    Atividade:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        sala:
+          type: string
+        titulo:
+          type: string
+          maxLength: 50
+        descricao:
+          type: string
+          maxLength: 150
+        data_criado:
+          type: string
+          format: date-time
+          readOnly: true
+        data_entrega:
+          type: string
+          format: date-time
+      required:
+      - data_criado
+      - data_entrega
+      - descricao
+      - sala
+      - titulo
+      - url
+    PatchedAluno:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 200
+        idade:
+          type: integer
+        semestre:
+          type: integer
+        curso:
+          type: string
+          maxLength: 50
+    PatchedAtividade:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        sala:
+          type: string
+        titulo:
+          type: string
+          maxLength: 50
+        descricao:
+          type: string
+          maxLength: 150
+        data_criado:
+          type: string
+          format: date-time
+          readOnly: true
+        data_entrega:
+          type: string
+          format: date-time
+    PatchedProfessor:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 200
+        idade:
+          type: integer
+    PatchedSala:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        owner:
+          type: string
+          readOnly: true
+        disciplina:
+          type: string
+          maxLength: 50
+        professor:
+          type: string
+        alunos:
+          type: array
+          items:
+            type: string
+    Professor:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 200
+        idade:
+          type: integer
+      required:
+      - idade
+      - nome
+      - url
+    Sala:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        owner:
+          type: string
+          readOnly: true
+        disciplina:
+          type: string
+          maxLength: 50
+        professor:
+          type: string
+        alunos:
+          type: array
+          items:
+            type: string
+      required:
+      - alunos
+      - disciplina
+      - owner
+      - professor
+      - url
+    TokenObtainPair:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - password
+      - refresh
+      - username
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          writeOnly: true
+      required:
+      - access
+      - refresh
+    User:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        pk:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        salas:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSala'
+          readOnly: true
+      required:
+      - pk
+      - salas
+      - url
+      - username
+    UserSala:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        disciplina:
+          type: string
+          maxLength: 50
+      required:
+      - disciplina
+      - url
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Bearer
