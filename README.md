@@ -73,4 +73,4 @@ python manage.py runserver 8000
 ```
 
 ### Vídeo: 
-(url do video)
+https://www.youtube.com/watch?v=l_RUxLfay1U
