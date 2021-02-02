@@ -1,4 +1,4 @@
-# Trabalho final de Programação para Internet 2
+# Trabalho Final de Programação para Internet 2
 
 ### Descrição do Projeto:
 A seguinte API visa simular um sistema clone do Google Classroom. Há três tipos de usuários:
