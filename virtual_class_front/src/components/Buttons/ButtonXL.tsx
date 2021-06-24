@@ -1,12 +1,12 @@
-import { Button } from '@chakra-ui/react';
+import { Button as ChakraButton, ButtonProps as ChakraButtonProps } from '@chakra-ui/react';
 
-interface ButtonProps {
+interface ButtonProps extends ChakraButtonProps {
   text: string;
 }
 
-export function ButtonXL({ text }: ButtonProps) {
+export function ButtonXL({ text, ...rest }: ButtonProps) {
   return (
-    <Button
+    <ChakraButton
       bg="blue.500"
       w="64"
       h="14"
@@ -16,8 +16,9 @@ export function ButtonXL({ text }: ButtonProps) {
       _hover={{
         bg: 'green.500',
       }}
+      {...rest}
     >
       {text}
-    </Button>
+    </ChakraButton>
   );
 }

@@ -5,6 +5,7 @@ import {
   Flex,
   Heading,
   Text,
+  Link
 } from '@chakra-ui/react';
 import React from 'react';
 import { ButtonXL } from '../components/Buttons/ButtonXL';
@@ -30,7 +31,9 @@ export default function Home() {
             Conectando alunos e professores, em todas as horas, em todos os
             lugares!
           </Text>
-          <ButtonXL text="Comece agora" />
+          <Link href="/login">
+            <ButtonXL text="Comece agora" />
+          </Link>
         </Flex>
         <Image
           src="/images/landing_page.svg"
