@@ -7,11 +7,15 @@ import {
   Text,
   Link
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useContext } from 'react';
 import { ButtonXL } from '../components/Buttons/ButtonXL';
+import { AuthContext } from '../contexts/AuthContext';
+import Router from 'next/router';
 
 
 export default function Home() {
+  const {isAuthenticated} = useContext(AuthContext);
+
   return (
     <Box maxWidth="1440px" mx="auto" mt="20">
       <Head>

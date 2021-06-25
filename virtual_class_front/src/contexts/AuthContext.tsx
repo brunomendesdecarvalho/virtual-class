@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import Router from 'next/router';
 import { setCookie, parseCookies, destroyCookie } from 'nookies';
-import { api } from '../services/api';
+import { api } from '../services/apiClient';
 
 type Classroom = {
   url: string;
@@ -39,12 +39,12 @@ export function signOut() {
 
   authChannel.postMessage('signOut');
 
-  Router.push('/');
+  Router.push('/login');
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>();
-  const isAuthenticated = !!user;
+  const [isAuthenticated, setIsAuthenticated] = useState(!!user);
 
   useEffect(() => {
     authChannel = new BroadcastChannel('auth');
@@ -62,6 +62,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
     };
   }, []);
+
+  useEffect(() => {
+    setIsAuthenticated(!!user);
+  }, [user]);
 
   useEffect(() => {
     const { 'nextauth.token': token } = parseCookies();
@@ -99,7 +103,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       
       api.defaults.headers['Authorization'] = `Bearer ${access}`;
-
+      setIsAuthenticated(true);
+      
       Router.push('/classrooms');
 
       authChannel.postMessage('signIn');

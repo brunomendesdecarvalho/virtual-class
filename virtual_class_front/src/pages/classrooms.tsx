@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, SimpleGrid, Box } from '@chakra-ui/react';
-import { api } from '../services/api';
+import { api } from '../services/apiClient';
 import { ClassroomCard } from '../components/Card/ClassroomCard';
 
 type Classroom = {

@@ -15,7 +15,6 @@ import { FiUser, FiLock } from 'react-icons/fi';
 import { InputWithIcon } from '../components/Form/InputWithIcon';
 import Head from 'next/head';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { api } from '../services/api';
 import { AuthContext } from '../contexts/AuthContext';
 
 type LoginInputs = {
