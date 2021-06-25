@@ -37,7 +37,7 @@ export default function Login() {
   };
 
   return (
-    <Flex align="center" justify="center" h="40vh">
+    <Flex align="center" justify="center" h="80vh">
       <Box
         as={'form'}
         onSubmit={handleSubmit(onSubmit)}

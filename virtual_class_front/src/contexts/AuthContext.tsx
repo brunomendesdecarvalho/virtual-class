@@ -55,7 +55,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           Router.push('/login');
           break;
         case 'signIn':
-          Router.push('/dashboard');
+          Router.push('/classrooms');
           break;
         default:
           break;
@@ -100,7 +100,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       
       api.defaults.headers['Authorization'] = `Bearer ${access}`;
 
-      Router.push('/');
+      Router.push('/classrooms');
 
       authChannel.postMessage('signIn');
     } catch (err) {

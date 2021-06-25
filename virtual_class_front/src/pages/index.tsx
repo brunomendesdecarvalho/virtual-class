@@ -13,7 +13,7 @@ import { ButtonXL } from '../components/Buttons/ButtonXL';
 
 export default function Home() {
   return (
-    <Box maxWidth="1440px" mx="auto">
+    <Box maxWidth="1440px" mx="auto" mt="20">
       <Head>
         <title>Virtual Class</title>
       </Head>
