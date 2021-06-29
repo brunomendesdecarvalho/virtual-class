@@ -1,7 +1,7 @@
 # Trabalho Final de Projeto Integrador 3 e Interação Humano-Computador
 
 ### Descrição do Projeto:
-A seguinte API visa simular um sistema clone do Google Classroom. Há três tipos de usuários:
+O seguinte projeto visa simular um sistema clone do Google Classroom. Há três tipos de usuários:
 - Administrador, que terá permissões de *super usuário*
 - Professor, que poderá criar salas e atividades.
 - Aluno, que poderá apenas visualizar o conteúdo da API.
