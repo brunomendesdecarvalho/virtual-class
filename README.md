@@ -1,4 +1,4 @@
-# Trabalho Final de Projeto Integrador 3 e Interação Humano-Computador
+# Virtual Class
 
 ### Descrição do Projeto:
 O seguinte projeto visa simular um sistema clone do Google Classroom. Há três tipos de usuários:
