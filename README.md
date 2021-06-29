@@ -50,7 +50,17 @@ Exemplo:
 - drf-spectacular==0.13.1
 
 #### Passo-a-passo no Shell:
-Para rodar o projeto, é importante que sejam feitas as migrações primeiro, logo:
+Antes de rodar o projeto, é necessária a instalação das bibliotecas. Dentro da pasta virtual-class, encontra-se um arquivo "requirements.txt", próprio para o pipenv. Para criar um novo ambiente virtual na pasta, com o pipenv, basta digitar:
+```
+pipenv shell
+```
+
+Para instalar as bibliotecas necessárias, com o ambiente virtual criado, digite:
+```
+pip install -r requirements.txt
+```
+
+Antes de rodar o projeto, as migrações devem ser feitas, logo:
 ```
 python manage.py makemigrations
 ```
@@ -69,8 +79,5 @@ E fornecer os dados requeridos.
 
 Por fim, para iniciar o servidor:
 ```
-python manage.py runserver 8000
+python manage.py runserver <porta-desejada>
 ```
-
-### Vídeo: 
-https://www.youtube.com/watch?v=l_RUxLfay1U
