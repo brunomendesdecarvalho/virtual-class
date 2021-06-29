@@ -17,11 +17,11 @@ export default function Home() {
   const {isAuthenticated} = useContext(AuthContext);
 
   return (
-    <Box maxWidth="1440px" mx="auto" mt="20">
+    <Flex maxWidth="1440px" mx="auto" h="80vh" align="center" justify="center">
       <Head>
         <title>Virtual Class</title>
       </Head>
-      <Flex align="center" justify="space-evenly" >
+      <Flex align="center" justify="space-evenly" w="full" >
         <Flex flexDirection="column" justifyContent="center" maxWidth="520px">
           <Heading
             fontSize="6xl"
@@ -45,6 +45,6 @@ export default function Home() {
           width="600px"
         />
       </Flex>
-    </Box>
+    </Flex>
   );
 }

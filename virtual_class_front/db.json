@@ -1,0 +1,209 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin",
+      "is_admin": true,
+      "is_aluno": false,
+      "is_teacher": false
+    },
+    {
+      "id": 2,
+      "username": "professor",
+      "password": "professor",
+      "is_admin": false,
+      "is_aluno": false,
+      "is_teacher": true
+    },
+    {
+      "id": 3,
+      "username": "aluno",
+      "password": "aluno",
+      "is_admin": false,
+      "is_aluno": true,
+      "is_teacher": false
+    }
+  ],
+  "salas": [
+    {
+      "id": 1,
+      "owner": "jonh doe",
+      "disciplina": "Artes",
+      "professor": "Rita de Castro",
+      "alunos": [
+        "aluno 1",
+        "aluno 2",
+        "aluno 3",
+        "aluno 4",
+        "aluno 5",
+        "aluno 6",
+        "aluno 7",
+        "aluno 8",
+        "aluno 9"
+      ]
+    },
+    {
+      "id": 2,
+      "owner": "jonh doe",
+      "disciplina": "Química",
+      "professor": "Neto Filho",
+      "alunos": [
+        "aluno 1",
+        "aluno 2",
+        "aluno 3",
+        "aluno 4",
+        "aluno 5",
+        "aluno 6",
+        "aluno 7",
+        "aluno 8",
+        "aluno 9",
+        "aluno 10"
+      ]
+    },
+    {
+      "id": 3,
+      "owner": "jonh doe",
+      "disciplina": "Literatura",
+      "professor": "Paula Silva",
+      "alunos": [
+        "aluno 1",
+        "aluno 2",
+        "aluno 3",
+        "aluno 4",
+        "aluno 5",
+        "aluno 6"
+      ]
+    },
+    {
+      "id": 4,
+      "owner": "jonh doe",
+      "disciplina": "Biologia",
+      "professor": "Rômulo",
+      "alunos": [
+        "aluno 1",
+        "aluno 2"
+      ]
+    },
+    {
+      "disciplina": "História",
+      "professor": "Adília",
+      "alunos": [
+        "asdasdasd",
+        "lucas"
+      ],
+      "id": 5
+    },
+    {
+      "disciplina": "Matemática",
+      "professor": "Sabino",
+      "alunos": [
+        ""
+      ],
+      "id": 6
+    },
+    {
+      "disciplina": "Física",
+      "professor": "Raulino",
+      "alunos": [
+        "Sabioa",
+        "12345",
+        "Adilson"
+      ],
+      "id": 7
+    },
+    {
+      "disciplina": "Finanças",
+      "professor": "Primo",
+      "alunos": [
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach",
+        "Coach"
+      ],
+      "id": 8
+    }
+  ],
+  "atividades": [
+    {
+      "id": 1,
+      "sala": "Artes",
+      "titulo": "Cores primárias",
+      "descricao": "Hora de aprender com as cores",
+      "data_criado": "2021-06-28T19:38:16.488Z",
+      "data_entrega": "2021-06-28T19:38:16.488Z"
+    },
+    {
+      "id": 2,
+      "sala": "Biologia",
+      "titulo": "Reino Bacterae",
+      "descricao": "Vamos conhecer um pouco mais sobre as bactérias? Pesquise o nome de uma bactéria.",
+      "data_criado": "2021-06-28T19:38:16.488Z",
+      "data_entrega": null
+    },
+    {
+      "id": 3,
+      "sala": "Química",
+      "titulo": "Colóides",
+      "descricao": "Quais destes são um colóide? Maionese ou Gelatina?",
+      "data_criado": "2021-06-28T19:38:16.488Z",
+      "data_entrega": "2021-06-28T19:38:16.488Z"
+    },
+    {
+      "id": 4,
+      "sala": "Literatura",
+      "titulo": "Explique como Lord Byron teve muita influência no gênero musical Emocore.",
+      "descricao": "Hora de aprender com as cores",
+      "data_criado": "2021-06-28T19:38:16.488Z",
+      "data_entrega": "2021-06-28T19:38:16.488Z"
+    },
+    {
+      "id": 5,
+      "sala": "Literatura",
+      "titulo": "Lorem Ipsum",
+      "descricao": "Sed ac venenatis risus. Nulla vitae turpis pellentesque dolor interdum finibus vel a nunc. Proin id pretium dui, nec scelerisque odio. Nulla tempus condimentum porta. Nullam fringilla lorem sit amet risus bibendum hendrerit. Proin congue auctor lacus id vehicula. Nullam gravida lacus ex, id sollicitudin orci pharetra sed. Suspendisse blandit nibh id erat dictum interdum. Donec semper, quam ut interdum finibus, enim velit consequat justo, non fringilla odio urna sit amet nunc. Quisque bibendum felis at justo efficitur porttitor. Fusce ac quam at nulla sodales consequat. Praesent id neque euismod, porta ipsum gravida, tristique neque. ",
+      "data_criado": "2021-06-28T19:38:16.488Z",
+      "data_entrega": "2021-06-28T19:38:16.488Z"
+    },
+    {
+      "titulo": "Nova Atividade",
+      "descricao": "Teste TESTE",
+      "sala": "Artes",
+      "data_criado": "2021-06-29T00:48:00.247Z",
+      "id": 6
+    }
+  ]
+}

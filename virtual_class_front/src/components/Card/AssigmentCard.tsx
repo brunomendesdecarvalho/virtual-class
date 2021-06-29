@@ -1,4 +1,4 @@
-import { Box, Text, Icon, Flex } from '@chakra-ui/react';
+import { Box, Text, Icon, Flex, Divider } from '@chakra-ui/react';
 import { FaBook, FaCheckCircle } from 'react-icons/fa';
 
 interface AssigmentCardProps {
@@ -21,7 +21,7 @@ export function AssigmentCard({
 
   return (
     <Flex
-      w="480px"
+      w="720px"
       minHeight="128px"
       p="4"
       bg="white"
@@ -30,16 +30,16 @@ export function AssigmentCard({
       direction="column"
       justify="space-between"
     >
-      <Flex align="center">
+      <Flex align="center" mb="4">
         <Icon as={FaBook} mr="2" color="blue.500"/>
         <Text fontWeight="600" fontSize="xl">{titulo}</Text>
         {isDelivered && <Icon ml="auto" as={FaCheckCircle} color="green.500" />}
       </Flex>
-      <Flex minHeight="64px" direction="column">
-        <Text >Descrição:</Text>
+      <Flex minHeight="64px" mb="2" direction="column">
         <Text ml="4">{descricao}</Text>
       </Flex>
-      <Flex align="center" justify="space-between">
+      <Divider />
+      <Flex align="center" mt="2" justify="space-between">
         <Text>Sala: {sala}</Text>
         <Text>Data: {new Date(data_criado).toLocaleString('pt-BR', {
           day: '2-digit',

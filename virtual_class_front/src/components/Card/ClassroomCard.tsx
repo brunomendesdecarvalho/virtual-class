@@ -38,7 +38,7 @@ export function ClassroomCard({title, teacher, students, number=1}: VerticalCard
       </Flex>
       <Flex p="4">
         <Icon as={FaUsers} mr="4"/>
-        <Text>{studentsCount} student{studentsCount !== 1 ? "s": ""}</Text>
+        <Text>{studentsCount} estudante{studentsCount !== 1 ? "s": ""}</Text>
       </Flex>
     </Flex>
   );

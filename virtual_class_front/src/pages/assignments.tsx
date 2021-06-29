@@ -1,7 +1,12 @@
-import { useEffect, useState } from 'react';
-import { Box, Flex, Text } from '@chakra-ui/react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Box, Text, Stack, Flex, useDisclosure } from '@chakra-ui/react';
+import { Button } from '../components/Buttons/Button';
 import { AssigmentCard } from '../components/Card/AssigmentCard';
-import { api } from '../services/apiClient';
+import Head from 'next/head';
+import { useAssignments } from '../hooks/useAssignments';
+import { AuthContext } from '../contexts/AuthContext';
+import Router from 'next/router';
+import { NewAssignmentModal } from '../components/Modals/NewAssignmentModal';
 
 type Assignment = {
   url: string;
@@ -13,24 +18,30 @@ type Assignment = {
 };
 
 export default function Assignments() {
-  const [assignments, setAssignments] = useState<Assignment[]>();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { assignments, createAssignment } = useAssignments();
+  const { isAuthenticated, user } = useContext(AuthContext);
 
   useEffect(() => {
-    api.get("atividades").then(response => {
-      setAssignments(response.data)
-    })
-  }, [])
-
-  if (!assignments) {
+    if (!isAuthenticated) {
+      Router.push("/login");
+    }
+  }, [isAuthenticated]);
+  
+  if (!assignments || !user) {
     return <Text>Nenhuma atividade encontrada. :(</Text>;
   }
 
   return (
     <Box maxWidth="1400px" mx="36">
-      <Text fontSize="3xl" fontWeight="bold" my="4">
-        Atividades
-      </Text>
-      <Flex w="full" justify="center">
+      <Flex my="8" justify="space-between">
+        <Text fontSize="3xl" fontWeight="bold">
+          Atividades
+        </Text>
+        { (!user.is_aluno) && <Button text="Nova Atividade" onClick={onOpen} w="42"/>}
+      </Flex>
+
+      <Stack w="full" align="center">
         {assignments.map(assignment => {
           return (
             <AssigmentCard
@@ -43,7 +54,11 @@ export default function Assignments() {
             />
           );
         })}
-      </Flex>
+      </Stack>
+      <Head>
+        <title>Atividades | Virtual Class</title>
+      </Head>
+      <NewAssignmentModal isOpen={isOpen} onClose={onClose}/>
     </Box>
   );
 }

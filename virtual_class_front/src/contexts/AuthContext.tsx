@@ -11,6 +11,9 @@ type Classroom = {
 type User = {
   username: string;
   salas: Classroom[];
+  is_admin: boolean;
+  is_aluno: boolean;
+  is_teacher: boolean;
 };
 
 type SignInCredentials = {
@@ -33,18 +36,19 @@ export const AuthContext = createContext({} as AuthContextData);
 
 let authChannel: BroadcastChannel;
 
-export function signOut() {
-  destroyCookie(undefined, 'nextauth.token');
-  destroyCookie(undefined, 'nextauth.refreshToken');
-
-  authChannel.postMessage('signOut');
-
-  Router.push('/login');
-}
-
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>();
-  const [isAuthenticated, setIsAuthenticated] = useState(!!user);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
+
+  useEffect(() => {
+    const { 'nextauth.authenticatedUser': userCookie } = parseCookies();
+    if (!!userCookie) {
+      setUser(JSON.parse(userCookie));
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, []);
 
   useEffect(() => {
     authChannel = new BroadcastChannel('auth');
@@ -63,54 +67,47 @@ export function AuthProvider({ children }: AuthProviderProps) {
     };
   }, []);
 
-  useEffect(() => {
-    setIsAuthenticated(!!user);
-  }, [user]);
 
-  useEffect(() => {
-    const { 'nextauth.token': token } = parseCookies();
-
-    if (token) {
-      api
-        .get('/users')
-        .then(response => {
-          const { username, salas } = response.data;
-          setUser({ username, salas });
-        })
-        .catch(() => {
-          signOut();
-        });
+  function getUserId(username: string): number {
+    switch (username) {
+      case "admin":
+        return 1
+      case "professor":
+        return 2
+      case "aluno":
+        return 3
+      default:
+        return -1
     }
-  }, []);
-
+  }
+  
   async function signIn({ username, password }: SignInCredentials) {
-    try {
-      const response = await api.post('api/token/', {
-        username,
-        password,
-      });
+    const userId = getUserId(username);
 
-      const { access, refresh } = response.data;
+    const response = await api.get("/users/" + userId);
+    const userResponse = response.data;
 
-      setCookie(undefined, 'nextauth.token', access, {
+    if (password === userResponse.password) {
+      setCookie(undefined, 'nextauth.authenticatedUser', JSON.stringify(userResponse), {
         maxAge: 60 * 60 * 24 * 30, // 30 days
         path: '/',
       });
-      setCookie(undefined, 'nextauth.refreshToken', refresh, {
-        maxAge: 60 * 60 * 24 * 30, // 30 days
-        path: '/',
-      });
-
-      
-      api.defaults.headers['Authorization'] = `Bearer ${access}`;
-      setIsAuthenticated(true);
-      
       Router.push('/classrooms');
-
-      authChannel.postMessage('signIn');
-    } catch (err) {
-      throw err;
+      return
     }
+
+    throw new Error("Login failed");
+  }
+
+  function signOut() {
+    destroyCookie(undefined, 'nextauth.authenticatedUser');
+
+    authChannel.postMessage('signOut');
+
+    setUser(undefined);
+    setIsAuthenticated(false);
+
+    Router.push('/');
   }
 
   return (
